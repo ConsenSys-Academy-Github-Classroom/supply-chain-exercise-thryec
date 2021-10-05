@@ -16,9 +16,9 @@ contract SupplyChain {
     string name;
     uint sku;
     uint price; 
-    uint state;
-    address seller; 
-    address buyer; 
+    State state;
+    address payable seller; 
+    address payable buyer; 
   }
   /* 
    * Events
