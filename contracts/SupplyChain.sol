@@ -4,27 +4,34 @@ pragma solidity >=0.5.16 <0.9.0;
 contract SupplyChain {
 
   // <owner>
-
+  address public owner; 
   // <skuCount>
-
-  // <items mapping>
+  uint256 public skuCount;  
+  // <items mapping>  
 
   // <enum State: ForSale, Sold, Shipped, Received>
-
+  enum State { ForSale, Sold, Shipped, Received }
   // <struct Item: name, sku, price, state, seller, and buyer>
-  
+  struct Item {
+    string name;
+    uint sku;
+    uint price; 
+    uint state;
+    address seller; 
+    address buyer; 
+  }
   /* 
    * Events
    */
 
   // <LogForSale event: sku arg>
-
+  event LogForSale(uint256 sku); 
   // <LogSold event: sku arg>
-
+  event LogSold(uint sku);
   // <LogShipped event: sku arg>
-
+  event LogShipped(uint sku); 
   // <LogReceived event: sku arg>
-
+  event LogReceived(uint sku); 
 
   /* 
    * Modifiers
@@ -33,7 +40,10 @@ contract SupplyChain {
   // Create a modifer, `isOwner` that checks if the msg.sender is the owner of the contract
 
   // <modifier: isOwner
-
+  modifier isOwner () {
+    require (msg.sender == owner); 
+    _; 
+  }
   modifier verifyCaller (address _address) { 
     // require (msg.sender == _address); 
     _;
